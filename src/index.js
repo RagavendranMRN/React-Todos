@@ -23,7 +23,6 @@ export class TaskManager extends Component {
       isCompleted: false
     };
     todos.push(todo_obj);
-    console.log(todo_obj);
     this.setState({ todos });
   };
 
