@@ -69,7 +69,7 @@ export class TaskManager extends Component {
 export function TaskList(props) {
   return (
     <div>
-      <div class="input-group mb-3">
+      <div class="input-group mx-2">
         <input type="text" id="taskData" class="form-control" />
         <button
           class="btn btn-primary"
