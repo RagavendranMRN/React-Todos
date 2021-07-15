@@ -2,7 +2,9 @@ h1,
 p {
   font-family: Lato;
 }
-.task {
-  border: 2px;
-  color: yellow;
+.check {
+  float: right;
+}
+.trash {
+  float: right;
 }
