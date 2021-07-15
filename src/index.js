@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import '../src/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 
 export class TaskManager extends Component {
   constructor() {
@@ -84,8 +84,12 @@ export function TaskList(props) {
           id="button-addon2"
           onClick={() => {
             props.onAddTask(document.getElementById('taskData').value);
-            const notify = () => toast('Wow so easy!');
-            notify();
+            toastr.options = {
+              positionClass: 'toast-bottom-full-width',
+              hideDuration: 300,
+              timeOut: 6000
+            };
+            toastr.success(`New task created`);
             document.getElementById('taskData').value = '';
           }}
         >
