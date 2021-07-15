@@ -8,6 +8,9 @@ import ReactDOM from 'react-dom';
 import '../src/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export class TaskManager extends Component {
   constructor() {
     super();
@@ -19,6 +22,7 @@ export class TaskManager extends Component {
   _handleKeyDown = todoValue => {
     let todos = [...this.state.todos];
     let todo_obj = {
+      key: this.state.todos.length,
       id: this.state.todos.length,
       title: todoValue,
       isCompleted: false
@@ -43,7 +47,6 @@ export class TaskManager extends Component {
         todo.isCompleted = false;
       }
     });
-    console.log(todos);
     this.setState({ todos });
   };
   // componentDidMount() {
@@ -56,28 +59,40 @@ export class TaskManager extends Component {
 
   render() {
     return (
-      <TaskList
-        todos={this.state.todos}
-        onAddTask={this._handleKeyDown}
-        onDeleteTask={this._handleDelete}
-        isCompleted={this._handleComplete}
-      />
+      <React.Fragment>
+        <h5 className="m-3">Simple Todo</h5>
+        <TaskList
+          todos={this.state.todos}
+          onAddTask={this._handleKeyDown}
+          onDeleteTask={this._handleDelete}
+          isCompleted={this._handleComplete}
+        />
+      </React.Fragment>
     );
   }
 }
 
 export function TaskList(props) {
   return (
-    <div>
-      <div class="input-group mx-2">
-        <input type="text" id="taskData" class="form-control" />
+    <div className="m-2">
+      <div class="input-group ">
+        <input
+          type="text"
+          id="taskData"
+          class="form-control"
+          onblur="this.value=''"
+          placeholder="Enter the task"
+        />
         <button
           class="btn btn-primary"
           type="button"
           id="button-addon2"
-          onClick={() =>
-            props.onAddTask(document.getElementById('taskData').value)
-          }
+          onClick={() => {
+            props.onAddTask(document.getElementById('taskData').value);
+            const notify = () => toast('Wow so easy!');
+            notify();
+            document.getElementById('taskData').value = '';
+          }}
         >
           Add task
         </button>
@@ -109,9 +124,9 @@ export function Task(props) {
     return 'fa fa-times';
   };
   return (
-    <div className="card m-2">
-      <div className="card-body">
-        <label className="m-1" style={styles()}>
+    <div className="card m-3">
+      <div className="p-1">
+        <label className="m-2" style={styles()}>
           {props.value.title}
         </label>
         <button
