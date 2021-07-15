@@ -1,8 +1,3 @@
-// list of tasks  - todo - Mock
-// Input of new tasks
-// task priority
-// completed
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import '../src/style.css';
@@ -19,7 +14,7 @@ export class TaskManager extends Component {
     };
   }
 
-  _handleKeyDown = todoValue => {
+  _handleAdd = todoValue => {
     let todos = [...this.state.todos];
     let todo_obj = {
       key: this.state.todos.length,
@@ -63,7 +58,7 @@ export class TaskManager extends Component {
         <h5 className="m-3">Simple Todo</h5>
         <TaskList
           todos={this.state.todos}
-          onAddTask={this._handleKeyDown}
+          onAddTask={this._handleAdd}
           onDeleteTask={this._handleDelete}
           isCompleted={this._handleComplete}
         />
